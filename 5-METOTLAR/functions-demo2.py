@@ -1,0 +1,1 @@
+#fonksiyonlar kullanarak çizgilerle dörtgen bastırma

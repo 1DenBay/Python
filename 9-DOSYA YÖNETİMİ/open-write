@@ -1,0 +1,64 @@
+# dosya açmak ve oluşturmak için open() fonk. kullanılır
+# kullanımı : open(dosya_Adi, dosya_erişme_modu)
+# dosya_erişme_modu => dosyayı hangi amaçla açtığımızı belirtir
+
+# "w": (write) yazma modudur. dosyayı konumda(konum -> yani işlemi yaptığımız dosya ile aynı klasörde) oluşturur. tekrardan işlem yapılırsa üstüne eski bilgileri SİLER YENİYİ yazar.
+# "a": (append) ekleme modudur. dosya konumda yoksa oluşturur. tekrardan işlem yapılırsa eski bilgileride TUTAR YENİYİ ekler
+# "x": (create) oluşturma modudur. dosya zaten varsa hata verir yoksa oluşturur
+# "r": (read) okuma modudur. varsayılar moddur yani birşey yazılmayınca oto seçilir. dosya konumda yoksa hata verir.
+
+# file = open("newfile.txt", "w") #bu şekilde bastırdığımızda bize encoding(kodlama) bilgisini verir bu win işletim sisteminde bu dosyanın nerede saklandığını yani koordinatını gibi bir şifre tarzı birşey verir 
+# dosya adı kısmına direkt dosyaya vereceğimiz ismi girmek yerine öncesinde tek tek nereye oluşturmak istiyorsak adresi girebiliriz "c:/users/deniz/masaüstü/newfile.txt" gibi
+# file.close() #işimiz bitince dosyayı arkada güç tüketmemesi için kapatmalıyız54
+
+###############################
+
+# write
+# file = open("newfile.txt", "w", encoding="utf-8") #encodinge utf8 metodu atadığımız zaman doya içine yazacağımız türkçe karakterler filan tanınır hale gelir
+# file.write("DENİZ BAYAT") #dosya içine yazı yazmak için write fonk. kullanılır
+# file.close() #işimiz bitince kapatmayı unutma
+
+#append
+# file = open("newfile.txt", "a", encoding="utf-8") #bilgileri silmeden aşağıda yazılan komutları yerine getirecek ve imleç en sona gelirekleme yapmak için
+# file.write("deniz bayat\n") #içindeki bilgilerin üzerine girilen ifadeye işler
+# file.close()
+
+#create
+# file = open("newfile2.txt", "x", encoding="utf-8") #sadece dosya oluşturmak için kullanılır aynı dosyadan var ise hata verir
+
+#read
+# try:
+#     file = open("newfile.txt", "r")
+#     print(file)
+# except FileNotFoundError:
+#     print("dosya okuma hatası")
+# finally:
+#     print("dosya kapandı")
+#     file.close
+
+file = open("newfile.txt", "r", encoding="utf-8")
+# for i in file: #dosya içinde ki parametreleri bu şeklide tek tek bastırabiliriz ama kısa yolu var
+#     print(i, end="") # end="" demek satır bitince " "(boşluk) karakteri koy demektir
+
+# content1 = file.read() #kısa yolu read metodu kullanılır
+# print("içerik 1")
+# print(content1)
+
+# content2 = file.read() #bu blok birşey bastırmaz içerik 2 yazısı dışında çünkü üstteki blok çalıştıktan sonra onu kapatmadığımız için imleç sonra kelimenin sonunda kaldı bu blokta kaldığı yerden devam edeceğinden hiç birşey kalmaz o yüzden işimiz bittikten sonra imlecin başa dönmesi için dosyayı kapatmalıyız
+# print("içerik 2")
+# print(content2)
+
+content = file.read(5) #parantez içindeki parametre ilk kaç karakterin okunacağını belirtir (her bir karakter 1 byte olduğundan aslında 5 byte olarak belirtilir yani 5 karakter denebilir)
+
+content = file.readline() #direkt satırı okur alt alta çalıştırılınca hep bir alttaki satırı okur
+
+liste = file.readline() #listeye çevirip
+print(liste[0]) #şeklinde indexten elemanlara ulaşılabilir
+
+############################
+
+with open("newfile.txt", "r", encoding="utf-8") as file: #if while gibi bir blok oluşturur dosya bitince otomatik kapatır
+    content = file.read()
+    print(content)
+    file.seek(0) #seek imleci yani cursoru paranteze girilen karaktere götürür
+    print(file.tell()) #tell imlecin nerede olduğunu söyle

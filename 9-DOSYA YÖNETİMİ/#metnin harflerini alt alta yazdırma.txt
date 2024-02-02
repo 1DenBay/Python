@@ -1,0 +1,41 @@
+#metnin harflerini alt alta yazdırma
+isim=input("Adınızı Girin : ")
+sayac=0
+while sayac < len(isim):
+  print(isim[sayac])
+  sayac += 1
+else:
+   print("Adının harflerini listeledim.")
+
+################################## metinde harf kontrolü
+
+def kontrol(str):
+  sayac = 0
+  for ch in str:
+    if ch == 'ğ':
+      sayac = sayac + 1
+      return True
+      break
+    
+metin=input('Metin : ')
+if(kontrol(metin)==True):
+      print('ğ karakteri metin içinde var')
+else:
+      print('ğ karakteri metin içinde yok')
+
+################################### 2 sayı arasındaki çift sayıların ortalamasını bulan     
+
+def ciftMi(x): 
+    return x % 2 == 0
+ 
+toplam=0
+sayac=0
+baslangic = input("Başlangıç Sayısı :")
+bitis = input("Bitiş Sayısı :")
+for sayi in range (int(baslangic), int(bitis)+1):
+    if(ciftMi(int(sayi))):
+      toplam =+ sayi
+      sayac = sayac+1
+print('Ortalama = '(toplam/sayac))
+
+#####################################
